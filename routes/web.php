@@ -23,4 +23,9 @@ Route::group(['prefix' => 'api/v1'], function () {
     Route::get('/', function(){
         return "API";
     });
+
+    Route::group(["prefix" => "authentication"], function () {
+        Route::post("login", "AuthenticationController@login");
+        Route::post("register", "AuthenticationController@register");
+    });
 });
