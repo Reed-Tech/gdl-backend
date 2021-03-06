@@ -38,13 +38,10 @@ class AuthenticationManagement {
             $user = new UserResource($user);
         });
         return $user;**/
-        if(Auth::attempt($data)){
-            $user = $this->userRepository->getById(Auth::user()->id);
-            return response()->json([
-                'user' => $user,
-                //'token' => $user->access_token
-            ]);
-        }
+        return response()->json([
+            'user' => $data,
+            //'token' => $user->access_token
+        ]);
     }
 
     public function register(array $data) {
