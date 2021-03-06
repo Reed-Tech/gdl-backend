@@ -36,8 +36,11 @@ class AuthenticationManagement {
             $user = new UserResource($user);
         });
         return $user;**/
+        $token = $this->auth->attempt($data);;
+        //$user->access_token = $token;
         return response()->json([
-            'data' => $data
+            'data' => $data,
+            'token' => $token
         ]);
     }
 
