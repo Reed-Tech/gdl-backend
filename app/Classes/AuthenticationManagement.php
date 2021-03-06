@@ -6,7 +6,7 @@ use App\Mail\RegistrationEmail;
 use App\Notifications\SuccessfulRegistration;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Auth\AuthenticationException;
-//use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -27,9 +27,9 @@ class AuthenticationManagement {
     }
 
     public function login(array $data) {
-        $user = null;
+        /**$user = null;
         DB::transaction(function () use ($data, &$user) {
-            $token = $this->auth->attempt($data);;
+            $token = $this->auth->attempt($data);
             if (!$token) {
                 throw new AuthenticationException("Incorrect credentials");
             }
@@ -37,7 +37,14 @@ class AuthenticationManagement {
             $user->access_token = $token;
             $user = new UserResource($user);
         });
-        return $user;
+        return $user;**/
+        if(Auth::attempt($data)){
+            $user = $this->userRepository->getById(Auth::user()->id);
+            return response()->json([
+                'user' => $user,
+                //'token' => $user->access_token
+            ]);
+        }
     }
 
     public function register(array $data) {
