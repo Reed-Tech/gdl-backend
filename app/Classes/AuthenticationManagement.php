@@ -6,10 +6,12 @@ use App\Mail\RegistrationEmail;
 use App\Notifications\SuccessfulRegistration;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
+
 
 class AuthenticationManagement {
     private $auth;
@@ -36,7 +38,7 @@ class AuthenticationManagement {
             $user = new UserResource($user);
         });
         return $user;**/
-        $token = $this->auth->attempt($data);;
+        $token = Auth::attempt($data);;
         //$user->access_token = $token;
         return response()->json([
             'data' => $data,
