@@ -25,7 +25,7 @@ class AuthenticationManagement {
     }
 
     public function login(array $data) {
-        $user = null;
+        /**$user = null;
         DB::transaction(function () use ($data, &$user) {
             $token = $this->auth->attempt($data);;
             if (!$token) {
@@ -35,7 +35,10 @@ class AuthenticationManagement {
             $user->access_token = $token;
             $user = new UserResource($user);
         });
-        return $user;
+        return $user;**/
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
     public function register(array $data) {
