@@ -83,7 +83,7 @@ $app->configure('session');
 // ]);
 
 $app->middleware([
-    //App\Http\Middleware\CorsMiddleware::class,
+    App\Http\Middleware\CorsMiddleware::class,
     Fruitcake\Cors\HandleCors::class,
     'Illuminate\Session\Middleware\StartSession'
 ]);
